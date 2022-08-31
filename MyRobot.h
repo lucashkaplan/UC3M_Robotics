@@ -3,10 +3,14 @@
 
 /**
  * @file    MyRobot.h
- * @brief   A simple example for maintaining a straight line with the compass.
+ * @brief   The header file for a navigation protocol for the final project in Robotics. The robot
+ * will navigate to the bottom of the obstacle course and identify one of the
+ * green pillars. After identification, the robot will drive to the pillar, stop
+ * and then repeat this process for the second pillar. After identifying both pillars,
+ * the robot will return to the top of the obstacle course.
  *
- * @author  Fernando Alonso Martín
- * @date    2022-10
+ * @author  Lucas Kaplan
+ * @date    5-20-2022
  */
 
 #include <iostream>
@@ -54,8 +58,6 @@ using namespace webots;
 #define CAM_T 40
 
 
-
-        
 class MyRobot : public Robot {
     public:
         /**
@@ -83,13 +85,13 @@ class MyRobot : public Robot {
         double convert_bearing_to_degrees(const double* in_vector);
         
         
-        /** Strategy to navegate using compass*/
+        /** Strategy to navigate using compass*/
         void compassStrategy();
         
-        /** Strategy to navegate using distance sensors*/
+        /** Strategy to navigate using distance sensors*/
         void distSensorStrategy();
        
-        /** Strategy to navegate using cameras*/
+        /** Strategy to navigate using cameras*/
         void camerasStrategy();
         
         //detecting green cylinders
@@ -106,7 +108,7 @@ class MyRobot : public Robot {
         // Infinity constant
         const double _infinity = numeric_limits<double>::infinity();
         
-        // The time step
+        // time step
         int _time_step;
         
         // velocities
@@ -158,7 +160,7 @@ class MyRobot : public Robot {
          */
         void compute_odometry();
         
-        /** To finish the controller */
+        /** To finish the program */
         bool goalReached;
         
         //for determining strategy used

@@ -1,10 +1,13 @@
 /**
  * @file    MyRobot.cpp
- * @brief   A simple example for maintaining a straight line with the compass.
+ * @brief   A navigation protocol for the final project in Robotics. The robot
+ * will navigate to the bottom of the obstacle course and identify one of the
+ * green pillars. After identification, the robot will drive to the pillar, stop
+ * and then repeat this process for the second pillar. After identifying both pillars,
+ * the robot will return to the top of the obstacle course.
  *
- * @author  Sara Marqu�s Villarroya <smarques@ing.uc3m.es>
- * @author  Juan Jos� Gamboa Montero <jgamboa@ing.uc3m.es>
- * @date    2020-10
+ * @author  Lucas Kaplan
+ * @date    5-20-2022
  */
 
 #include "MyRobot.h"
@@ -357,7 +360,7 @@ void MyRobot::run() {
 }
 
 //////////////////////////////////////////////
-
+// converting compass measurements to degrees
 double MyRobot::convert_bearing_to_degrees(const double* in_vector) {
     double rad = atan2(in_vector[0], in_vector[2]);
     double deg = rad * (180.0 / M_PI);
@@ -371,7 +374,7 @@ double MyRobot::convert_bearing_to_degrees(const double* in_vector) {
 }
 
 //////////////////////////////////////////////
-
+// computing robots odometry
 void MyRobot::compute_odometry() {
     float nuevaOdometriaRuedaDer = WHEEL_RADIUS * _right_wheel_sensor->getValue();
     float incrementoOdometriaRuedaDerecha = nuevaOdometriaRuedaDer - _odometriaAcumuladaRuedaDerecha;
@@ -392,7 +395,9 @@ void MyRobot::compute_odometry() {
 }
 
 //////////////////////////////////////////////
-  //Checking color of encountered object
+// Object color checks
+
+// Checking color of encountered object (very close to robot)
 bool MyRobot::GreenClose() {
     cout << BLUE << "\nChecking object color" RESET_COLOR << endl;
 
@@ -461,6 +466,7 @@ bool MyRobot::GreenClose() {
     }
 }
 
+// determining color of object in front of robot, but far away
 bool MyRobot::GreenInFront() {
       cout << GREEN << "\nChecking object color" RESET_COLOR << endl;
   
@@ -677,7 +683,6 @@ void MyRobot::distSensorStrategy() {
 
 /////////////////////////////////////////////
 // Compass Navigation
-//compass controler
 void MyRobot::compassStrategy() {
     if (compass_angle < (DESIRED_ANGLE - 2)) {
           // turn right
@@ -697,11 +702,4 @@ void MyRobot::compassStrategy() {
           }
       }
 }
-
-
-
-
-
-
-
 

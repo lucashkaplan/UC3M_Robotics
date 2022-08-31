@@ -1,10 +1,14 @@
 /**
  * @file    compass_example.cpp
- * @brief   A simple example for maintaining a straight line with the compass.
+ * @brief   The main program enabling the robot to enact a navigation protocol 
+ * used for the final project in Robotics. The robot
+ * will navigate to the bottom of the obstacle course and identify one of the
+ * green pillars. After identification, the robot will drive to the pillar, stop
+ * and then repeat this process for the second pillar. After identifying both pillars,
+ * the robot will return to the top of the obstacle course.
  *
- * @author  Sara Marqués Villarroya <smarques@ing.uc3m.es>
- * @author  Juan José Gamboa Montero <jgamboa@ing.uc3m.es>
- * @date    2020-10
+ * @author  Lucas Kaplan
+ * @date    5-20-2022
  */
 
 #include "MyRobot.h"
